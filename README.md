@@ -1,42 +1,77 @@
-# robot_controlling_using_hand_gestures
+# Robot Controlling Using Hand Gestures 🤖✋
 
-pybullet is used to create simulation 
-Here’s a clean and professional **GitHub project description** for your **"Robot Controlling Using Hand Gestures"** project:
+Control a simulated robot hands-free using real-time hand gesture recognition.
 
+The system captures hand movements from a webcam, classifies gestures with a Keras deep learning model, and drives a robot in a PyBullet simulation.
 
- Robot Controlling Using Hand Gestures 🤖✋
+## Features
 
-This project demonstrates controlling a robot using **hand gesture recognition** with **Python**. The system uses a webcam to capture real-time hand movements, processes them with computer vision and deep learning techniques, and then sends control commands to a simulated robot built with **PyBullet**.
+- Real-time hand gesture recognition with MediaPipe Holistic and OpenCV
+- Gesture classification with a Keras model (`model.h5` + `labels.npy`)
+- Robot simulation in PyBullet with `hrobot.urdf` on `plane.urdf`
+- Live prediction overlay on the camera feed
+- Easy-to-run Python code
 
-🚀 Features
+## Gestures
 
-* Real-time hand gesture recognition using **MediaPipe** and **OpenCV**.
-* Robot simulation environment created using **PyBullet**.
-* Machine learning support with **Keras** for gesture classification.
-* Efficient mathematical operations with **NumPy**.
-* Easy-to-run Python code for gesture-based robot control.
+| Gesture | Robot Movement |
+|---------|----------------|
+| MoveForward | Move forward |
+| MoveBackWard | Move backward |
+| Move Right | Move right |
+| Move Left | Move left |
 
-🛠️ Libraries & Technologies
+Predictions below the 0.5 confidence threshold are ignored and shown as `None`.
 
-* **NumPy** – For mathematical operations.
-* **OpenCV** – For image processing and capturing frames from the webcam.
-* **MediaPipe** – For detecting and tracking hand landmarks.
-* **Keras** – For training and using gesture classification models.
-* **PyBullet** – For robot simulation.
+## Requirements
 
-📌 How It Works
+- Python 3.8+
+- Webcam
 
-1. Capture real-time hand gestures from the webcam.
-2. Detect hand landmarks using **MediaPipe**.
-3. Classify gestures using a **Keras** deep learning model.
-4. Map the recognized gestures to robot control commands in **PyBullet**.
-5. Simulate robot movements based on detected gestures.
+Install dependencies:
 
-🔧 Future Enhancements
+```bash
+pip install opencv-python mediapipe keras numpy pybullet
+```
 
-* Add support for controlling a **real hardware robot** (via Arduino/Raspberry Pi).
-* Train a custom dataset for more complex hand gestures.
-* Improve gesture accuracy with advanced deep learning models.
+## How to Run
 
+```bash
+python robot.py
+```
 
+1. Ensure `model.h5`, `labels.npy`, `hrobot.urdf`, and `plane.urdf` are in the project directory.
+2. Run `robot.py`. A PyBullet simulation window and a camera window will open.
+3. Show a gesture to the webcam to move the simulated robot.
+4. Press `Esc` in the camera window to quit.
 
+## Project Structure
+
+```text
+.
+├── robot.py      # Main script: gesture recognition and robot control
+├── hrobot.urdf   # Robot model for PyBullet simulation
+├── plane.urdf    # Ground plane for PyBullet simulation
+├── model.h5      # Trained Keras gesture classification model
+├── labels.npy    # Gesture labels for the model
+└── README.md     # Project documentation
+```
+
+## How It Works
+
+1. OpenCV captures frames from the webcam.
+2. MediaPipe Holistic detects left- and right-hand landmarks.
+3. Hand landmarks are normalized and passed to the Keras model for gesture classification.
+4. The predicted gesture is mapped to a movement command (`dx`, `dy`).
+5. PyBullet moves the simulated robot accordingly.
+6. The current prediction is shown as an overlay on the camera feed.
+
+## Future Improvements
+
+- Support for controlling a real hardware robot (via Arduino / Raspberry Pi)
+- Train on a larger custom dataset for more gestures
+- Improve gesture accuracy with advanced deep learning models
+
+## Author
+
+Muhammad Waqar — [LinkedIn](https://www.linkedin.com/in/mwaqar-ai/)
